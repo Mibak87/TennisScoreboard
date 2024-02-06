@@ -2,11 +2,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>JSP - Hello World</title>
+  <title></title>
 </head>
 <body>
-<h1><%= "Hello World!" %></h1>
+<h1><%= "Большой теннис" %></h1>
 <br/>
-<a href="hello-servlet">Hello Servlet</a>
+<a href="/new-match">Новый матч</a>
 </body>
 </html>
