@@ -2,11 +2,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title></title>
+  <title>Большой теннис</title>
 </head>
 <body>
 <h1><%= "Большой теннис" %></h1>
 <br/>
-<a href="/new-match">Новый матч</a>
+<p><a href="/new-match">Новый матч</a></p>
+
+<p><a href="/matches">Завершенные матчи</a></p>
 </body>
 </html>
