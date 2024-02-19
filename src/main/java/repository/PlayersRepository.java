@@ -1,6 +1,10 @@
 package repository;
 
+import entity.Matches;
 import entity.Players;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+import utils.HibernateUtil;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -9,12 +13,20 @@ import java.util.Optional;
 public class PlayersRepository implements ScoreboardRepository<Players> {
     @Override
     public Optional<Players> findById(long id) throws SQLException {
-        return Optional.empty();
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            Players players = session.get(Players.class,id);
+            return Optional.ofNullable(players);
+        }
     }
 
     @Override
     public void save(Players players) throws SQLException {
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            Transaction transaction = session.beginTransaction();
+            session.persist(players);
+            transaction.commit();
 
+        }
     }
 
     @Override

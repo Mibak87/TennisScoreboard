@@ -1,16 +1,13 @@
 package entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
+@ToString
 @Entity
 @Table(name = "Players")
 public class Players {
@@ -18,4 +15,8 @@ public class Players {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String name;
+
+    public Players (String name) {
+        this.name = name;
+    }
 }
