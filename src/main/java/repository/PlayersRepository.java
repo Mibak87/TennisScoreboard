@@ -1,6 +1,5 @@
 package repository;
 
-import entity.Matches;
 import entity.Players;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -15,8 +14,8 @@ public class PlayersRepository implements ScoreboardRepository<Players> {
     @Override
     public Optional<Players> findById(long id) throws HibernateException {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            Players players = session.get(Players.class,id);
-            return Optional.ofNullable(players);
+            Players player = session.get(Players.class,id);
+            return Optional.ofNullable(player);
         }
     }
 
@@ -26,17 +25,24 @@ public class PlayersRepository implements ScoreboardRepository<Players> {
             Transaction transaction = session.beginTransaction();
             session.persist(players);
             transaction.commit();
-
         }
     }
 
     @Override
     public List<Players> findAll() throws HibernateException {
-        return null;
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            return session.createQuery("FROM Players", Players.class).getResultList();
+        }
     }
 
     @Override
     public Optional<Players> findByName(String name) throws HibernateException {
-        return Optional.empty();
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            String query = "FROM Players WHERE name = :name";
+            Players player = session.createQuery(query, Players.class)
+                    .setParameter("name", "Сафин")
+                    .getSingleResult();
+            return Optional.ofNullable(player);
+        }
     }
 }
