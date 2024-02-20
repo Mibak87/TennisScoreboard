@@ -1,16 +1,13 @@
 package entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
+@ToString
 @Entity
 @Table(name = "Matches")
 public class Matches {
@@ -26,4 +23,10 @@ public class Matches {
     @ManyToOne
     @JoinColumn(name = "Winner")
     private Players winner;
+
+    public Matches(Players player1, Players player2, Players winner) {
+        this.player1 = player1;
+        this.player2 = player2;
+        this.winner = winner;
+    }
 }

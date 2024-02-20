@@ -40,7 +40,7 @@ public class PlayersRepository implements ScoreboardRepository<Players> {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             String query = "FROM Players WHERE name = :name";
             Players player = session.createQuery(query, Players.class)
-                    .setParameter("name", "Сафин")
+                    .setParameter("name", name)
                     .getSingleResult();
             return Optional.ofNullable(player);
         }
