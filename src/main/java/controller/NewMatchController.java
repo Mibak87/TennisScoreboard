@@ -29,7 +29,7 @@ public class NewMatchController extends HttpServlet {
             UUID matchId = UUID.randomUUID();
             Match currentMatch = new Match(player1.getId(), player2.getId());
             MatchMap.updateCurrentMatch(matchId,currentMatch);
-            response.sendRedirect("/match-score.html?uuid=" + matchId);
+            response.sendRedirect("match-score.html?uuid=" + matchId);
         } catch (HibernateException e) {
             e.printStackTrace();
         }
