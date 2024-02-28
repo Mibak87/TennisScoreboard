@@ -15,5 +15,7 @@ public class Match {
     public Match(long player1Id, long player2Id) {
         this.player1Id = player1Id;
         this.player2Id = player2Id;
+        player1Score = 0;
+        player2Score = 0;
     }
 }

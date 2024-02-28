@@ -9,7 +9,7 @@
     <div id="heading">
         <h1>Большой теннис</h1>
         <br/>
-        <p><a href="new-match.html">Новый матч</a></p>
+        <p><a href="new-match.jsp">Новый матч</a></p>
         <p><a href="/matches">Завершенные матчи</a></p>
     </div>
     <section></section>
