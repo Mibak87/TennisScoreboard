@@ -11,8 +11,8 @@
   <table>
     <tr>
       <td>Имя</td>
-      <td>${player1}</td>
-      <td>${player2}</td>
+      <td>${player1name}</td>
+      <td>${player2name}</td>
     </tr>
     <tr>
       <td>Счет</td>
@@ -22,11 +22,11 @@
   </table>
   <p>
   <form name="MatchScore" action="match-score" method="post">
-    <input type="hidden" name="player1" value="player1" disabled>
+    <input type="text" name="player1id" value=${player1id} readonly>
     <button type="submit">Игрок1 выиграл</button>
   </form>
   <form name="MatchScore" action="match-score" method="post">
-    <input type="hidden" name="player2" value="player2" disabled>
+    <input type="text" name="player2id" value=${player2id} readonly>
     <button type="submit">Игрок2 выиграл</button>
   </form>
   </p>
