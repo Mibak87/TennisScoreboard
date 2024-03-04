@@ -16,6 +16,7 @@ public class Match {
     private byte player1Set;
     private byte player2Set;
     private boolean overScore;
+    private boolean tieBreak;
 
 
     public Match(long player1Id, long player2Id) {
