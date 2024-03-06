@@ -10,7 +10,7 @@
         <h1>Большой теннис</h1>
         <br/>
         <p><a href="new-match.jsp">Новый матч</a></p>
-        <p><a href="/matches">Завершенные матчи</a></p>
+        <p><a href="matches?page=1">Завершенные матчи</a></p>
     </div>
     <section></section>
 </div>

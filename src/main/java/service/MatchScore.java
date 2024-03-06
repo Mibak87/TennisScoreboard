@@ -39,12 +39,12 @@ public class MatchScore {
                         }
                     }
                     case -1 -> {
-                        if (gamePlayer2 < 5) {
+                        if (gamePlayer2 < 6) {
                             match.setPlayer1Game((byte) (gamePlayer1 + 1));
                         } else {
                             match.setPlayer1Game((byte) 0);
                             match.setPlayer2Game((byte) 0);
-                            match.setPlayer1Set((byte) (match.getPlayer1Set() + 1));
+                            match.setTieBreak(true);
                         }
                     }
                     default -> {
@@ -74,8 +74,10 @@ public class MatchScore {
                             match.setPlayer2Score((byte) 0);
                         }
                     }
+                    match.setPlayer1Score((byte) 15);
+                } else if (match.isTieBreak()) {
+
                 }
-                match.setPlayer1Score((byte) 15);
             }
         }
     }
