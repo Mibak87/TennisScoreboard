@@ -15,12 +15,15 @@ public class MatchesController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int pageNumber =Integer.parseInt(request.getParameter("page"));
         List<Matches> matchesList = new MatchesRepository().findAll();
-        for (int i = 5*pageNumber - 5; i <= 5*pageNumber - 1; i++) {
+        int start = 5*pageNumber - 5;
+        int limit = Math.min (5*pageNumber - 1, matchesList.size() - 1);
+        for (int i = start; i <= limit; i++) {
             Matches match = matchesList.get(i);
-            request.setAttribute("player1_" + i,match.getPlayer1().getName());
-            request.setAttribute("player2_" + i,match.getPlayer2().getName());
-            request.setAttribute("winner_" + i,match.getWinner().getName());
+            request.setAttribute("player1_" + (i - start),match.getPlayer1().getName());
+            request.setAttribute("player2_" + (i - start),match.getPlayer2().getName());
+            request.setAttribute("winner_" + (i - start),match.getWinner().getName());
         }
+        request.setAttribute("page_number",pageNumber+1);
         RequestDispatcher dispatcher = request.getRequestDispatcher("matches.jsp");
         dispatcher.forward(request,response);
     }

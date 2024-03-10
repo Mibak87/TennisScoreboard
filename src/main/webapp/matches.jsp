@@ -40,6 +40,10 @@
             <td>${winner_4}</td>
         </tr>
     </table>
+    <form action="matches">
+        <input type="hidden" name="page" value=${page_number}>
+        <button type="submit">Следующая страница</button>
+    </form>
 </div>
 </body>
 </html>
