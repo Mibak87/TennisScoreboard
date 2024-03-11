@@ -10,5 +10,4 @@ public interface ScoreboardRepository<T> {
     Optional<T> findById(long id) throws HibernateException;
     void save (T t) throws HibernateException;
     List<T> findAll() throws HibernateException;
-    Optional<T> findByName(String name) throws HibernateException;
 }

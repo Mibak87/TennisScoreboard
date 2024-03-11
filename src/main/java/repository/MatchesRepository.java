@@ -4,6 +4,7 @@ import entity.Matches;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 import utils.HibernateUtil;
 
 
@@ -19,11 +20,14 @@ public class MatchesRepository implements ScoreboardRepository<Matches> {
             return Optional.ofNullable(matches);
         }
     }
-
-    @Override
-    public Optional<Matches> findByName(String name) throws HibernateException {
-
-        return Optional.empty();
+    public List<Matches> findByName(String name) throws HibernateException {
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            String hql = "FROM Matches m JOIN m.player1 p JOIN m.player2 p1" +
+                    " WHERE p.name = :playerName OR p1.name = :playerName";
+            Query query = session.createQuery(hql);
+            query.setParameter("playerName",name);
+            return query.list();
+        }
     }
 
     @Override

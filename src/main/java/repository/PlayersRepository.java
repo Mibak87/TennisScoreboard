@@ -35,7 +35,6 @@ public class PlayersRepository implements ScoreboardRepository<Players> {
         }
     }
 
-    @Override
     public Optional<Players> findByName(String name) throws HibernateException {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             String query = "FROM Players WHERE name = :name";

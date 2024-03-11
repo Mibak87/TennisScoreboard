@@ -13,8 +13,18 @@ import java.util.List;
 public class MatchesController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int pageNumber =Integer.parseInt(request.getParameter("page"));
-        List<Matches> matchesList = new MatchesRepository().findAll();
+        String page = request.getParameter("page");
+        int pageNumber = 1;
+        if (page != null) {
+            pageNumber = Integer.parseInt(page);
+        }
+        String filterPlayer = request.getParameter("filter_by_player_name");
+        List<Matches> matchesList;
+        if (filterPlayer == null || filterPlayer.equals("")) {
+            matchesList = new MatchesRepository().findAll();
+        } else {
+            matchesList = new MatchesRepository().findByName(filterPlayer);
+        }
         int start = 5*pageNumber - 5;
         int limit = Math.min (5*pageNumber - 1, matchesList.size() - 1);
         for (int i = start; i <= limit; i++) {
