@@ -1,15 +1,15 @@
 package service;
 
 public class MatchScore {
-    public void getMatchScore(Match match, long playerId) {
+    public Match getMatchScore(Match match, long playerId) {
         if (match.getPlayer1Id() == playerId) {
-            getPlayer1WinScore(match);
+            return getPlayer1WinScore(match);
         } else {
-            getPlayer2WinScore(match);
+            return getPlayer2WinScore(match);
         }
     }
 
-    public void getPlayer1WinScore(Match match) {
+    public Match getPlayer1WinScore(Match match) {
         switch (match.getPlayer1Score()) {
             case 15 -> match.setPlayer1Score((byte) 30);
             case 30 -> {
@@ -76,14 +76,37 @@ public class MatchScore {
                     }
                     match.setPlayer1Score((byte) 15);
                 } else if (match.isTieBreak()) {
-
+                    byte gameDifference = (byte) (match.getPlayer1Game() - match.getPlayer2Game());
+                    byte player1Game = match.getPlayer1Game();
+                    switch (gameDifference) {
+                        case 0,-1 -> match.setPlayer1Game((byte) (player1Game + 1));
+                        case 1 -> {
+                            if (match.getPlayer2Game() == 5) {
+                                match.setPlayer1Game((byte) 0);
+                                match.setPlayer2Game((byte) 0);
+                                match.setPlayer1Set((byte) (match.getPlayer1Set() + 1));
+                                match.setTieBreak(false);
+                            }
+                        }
+                        default -> {
+                            if (match.getPlayer1Game() == 6 && gameDifference > 0) {
+                                match.setPlayer1Game((byte) 0);
+                                match.setPlayer2Game((byte) 0);
+                                match.setPlayer1Set((byte) (match.getPlayer1Set() + 1));
+                                match.setTieBreak(false);
+                            } else {
+                                match.setPlayer1Game((byte) (player1Game + 1));
+                            }
+                        }
+                    }
                 }
             }
         }
+        return match;
     }
 
-    public void getPlayer2WinScore(Match match) {
-
+    public Match getPlayer2WinScore(Match match) {
+        return match;
     }
 
 }
