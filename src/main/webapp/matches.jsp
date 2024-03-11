@@ -8,6 +8,12 @@
 <body>
 <div id="wrapper">
     <h1><%= "Завершенные матчи" %></h1>
+    <p>
+    <form name="NewMatch" action="matches" method="get">
+        <input type="text" name="filter_by_player_name" placeholder="Имя игрока">
+        <button type="submit">Поиск</button>
+    </form>
+    </p>
     <table>
         <tr>
             <td>Игрок 1</td>
@@ -41,8 +47,12 @@
         </tr>
     </table>
     <form action="matches">
-        <input type="hidden" name="page" value=${page_number}>
-        <button type="submit">Следующая страница</button>
+        <input type="hidden" name="page" value=${page_number_last}>
+        <button type="submit" ${button1_hidden}>Предыдущая страница</button>
+    </form>
+    <form action="matches">
+        <input type="hidden" name="page" value=${page_number_next}>
+        <button type="submit" ${button2_hidden}>Следующая страница</button>
     </form>
 </div>
 </body>

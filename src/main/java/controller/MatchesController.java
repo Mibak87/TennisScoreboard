@@ -23,7 +23,18 @@ public class MatchesController extends HttpServlet {
             request.setAttribute("player2_" + (i - start),match.getPlayer2().getName());
             request.setAttribute("winner_" + (i - start),match.getWinner().getName());
         }
-        request.setAttribute("page_number",pageNumber+1);
+        if (pageNumber == 1) {
+            request.setAttribute("button1_hidden","hidden");
+        } else {
+            request.setAttribute("button1_hidden","");
+        }
+        if (pageNumber == (matchesList.size() / 5) + 1) {
+            request.setAttribute("button2_hidden","hidden");
+        } else {
+            request.setAttribute("button2_hidden","");
+        }
+        request.setAttribute("page_number_last",pageNumber-1);
+        request.setAttribute("page_number_next",pageNumber+1);
         RequestDispatcher dispatcher = request.getRequestDispatcher("matches.jsp");
         dispatcher.forward(request,response);
     }
