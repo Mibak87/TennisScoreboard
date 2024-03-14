@@ -9,6 +9,7 @@ import jakarta.servlet.ServletOutputStream;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import repository.PlayersRepository;
+import service.FinishedMatchesPersistenceService;
 import service.Match;
 import service.MatchMap;
 import service.MatchScore;
@@ -44,6 +45,7 @@ public class MatchScoreController extends HttpServlet {
         match = new MatchScore().getMatchScore(match,playerId);
         MatchMap.updateCurrentMatch(matchId,match);
         if (match.getPlayer1Set() == 2 || match.getPlayer1Set() == 2) {
+            new FinishedMatchesPersistenceService().saveFinishedMatch(match);
             System.out.println("Конец!");
 
         }
