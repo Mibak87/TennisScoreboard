@@ -17,4 +17,8 @@ public class MatchMap {
         }
         currentMatch.put(matchId, match);
     }
+
+    public static void deleteFinishedMatch(UUID matchId) {
+        currentMatch.remove(matchId);
+    }
 }

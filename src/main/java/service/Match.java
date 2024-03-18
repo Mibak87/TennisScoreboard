@@ -3,6 +3,7 @@ package service;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
@@ -15,8 +16,10 @@ public class Match {
     private byte player2Game;
     private byte player1Set;
     private byte player2Set;
+    private boolean player2Win;
     private boolean overScore;
     private boolean tieBreak;
+    private boolean finished;
 
 
     public Match(long player1Id, long player2Id) {
@@ -28,6 +31,9 @@ public class Match {
         player2Game = 0;
         player1Set = 0;
         player2Set = 0;
+        player2Win = false;
         overScore = false;
+        tieBreak = false;
+        finished = false;
     }
 }

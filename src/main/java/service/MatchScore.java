@@ -52,6 +52,8 @@ public class MatchScore {
                             match.setPlayer1Game((byte) (gamePlayer1 + 1));
                         } else {
                             match.setPlayer1Set((byte) (match.getPlayer1Set() + 1));
+                            match.setPlayer1Game((byte) 0);
+                            match.setPlayer2Game((byte) 0);
                         }
                     }
                 }
@@ -86,6 +88,8 @@ public class MatchScore {
                                 match.setPlayer2Game((byte) 0);
                                 match.setPlayer1Set((byte) (match.getPlayer1Set() + 1));
                                 match.setTieBreak(false);
+                                match.setPlayer1Game((byte) 0);
+                                match.setPlayer2Game((byte) 0);
                             }
                         }
                         default -> {
@@ -94,11 +98,15 @@ public class MatchScore {
                                 match.setPlayer2Game((byte) 0);
                                 match.setPlayer1Set((byte) (match.getPlayer1Set() + 1));
                                 match.setTieBreak(false);
+                                match.setPlayer1Game((byte) 0);
+                                match.setPlayer2Game((byte) 0);
                             } else {
                                 match.setPlayer1Game((byte) (player1Game + 1));
                             }
                         }
                     }
+                } else {
+                    match.setPlayer1Score((byte) 15);
                 }
             }
         }

@@ -5,7 +5,6 @@ import java.util.UUID;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.ServletOutputStream;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import repository.PlayersRepository;
@@ -36,6 +35,15 @@ public class MatchScoreController extends HttpServlet {
         request.setAttribute("game2",match.getPlayer2Game());
         request.setAttribute("set1",match.getPlayer1Set());
         request.setAttribute("set2",match.getPlayer2Set());
+        if (match.isFinished()) {
+            request.setAttribute("button_disabled","disabled");
+            String playerWin = player1;
+            if (match.isPlayer2Win()) {
+                playerWin = player2;
+            }
+            request.setAttribute("finish","Матч закончен! Победитель - " + playerWin + "!");
+            MatchMap.deleteFinishedMatch(matchId);
+        }
         RequestDispatcher dispatcher = request.getRequestDispatcher("match-score.jsp");
         dispatcher.forward(request,response);
     }
@@ -43,12 +51,15 @@ public class MatchScoreController extends HttpServlet {
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException,ServletException {
         long playerId = Long.parseLong(request.getParameter("player-id"));
         match = new MatchScore().getMatchScore(match,playerId);
-        MatchMap.updateCurrentMatch(matchId,match);
-        if (match.getPlayer1Set() == 2 || match.getPlayer1Set() == 2) {
+        if (match.getPlayer1Set() == 2) {
             new FinishedMatchesPersistenceService().saveFinishedMatch(match);
-            System.out.println("Конец!");
-
+            match.setFinished(true);
+        } else if (match.getPlayer2Set() == 2) {
+            new FinishedMatchesPersistenceService().saveFinishedMatch(match);
+            match.setFinished(true);
+            match.setPlayer2Win(true);
         }
+        MatchMap.updateCurrentMatch(matchId,match);
         response.sendRedirect("match-score?uuid=" + matchId);
     }
 }

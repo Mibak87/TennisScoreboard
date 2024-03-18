@@ -8,6 +8,7 @@
 <body>
 <div id="wrapper">
   <p>Счет матча</p>
+  <p>${finish}</p>
   <table>
     <tr>
       <td>Имя</td>
@@ -23,7 +24,7 @@
       <td>
         <form name="MatchScore" action="match-score" method="post">
           <input type="hidden" name="player-id" value=${player1id}>
-          <button type="submit">${player1name} выиграл</button>
+          <button type="submit" ${button_disabled}>${player1name} выиграл</button>
         </form>
       </td>
     </tr>
@@ -35,7 +36,7 @@
       <td>
         <form name="MatchScore" action="match-score" method="post">
           <input type="hidden" name="player-id" value=${player2id}>
-          <button type="submit">${player2name} выиграл</button>
+          <button type="submit" ${button_disabled}>${player2name} выиграл</button>
         </form>
       </td>
     </tr>
