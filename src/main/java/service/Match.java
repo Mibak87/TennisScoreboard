@@ -36,4 +36,14 @@ public class Match {
         tieBreak = false;
         finished = false;
     }
+
+    public void setZeroScores() {
+        setPlayer1Score((byte) 0);
+        setPlayer2Score((byte) 0);
+    }
+
+    public void setZeroGames() {
+        setPlayer1Game((byte) 0);
+        setPlayer2Game((byte) 0);
+    }
 }

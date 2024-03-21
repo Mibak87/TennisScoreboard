@@ -43,6 +43,10 @@ public class MatchScoreController extends HttpServlet {
             }
             request.setAttribute("finish","Матч закончен! Победитель - " + playerWin + "!");
             MatchMap.deleteFinishedMatch(matchId);
+        } else if (match.isTieBreak()) {
+            request.setAttribute("finish","Тай-брейк!");
+        } else {
+            request.setAttribute("finish","");
         }
         RequestDispatcher dispatcher = request.getRequestDispatcher("match-score.jsp");
         dispatcher.forward(request,response);
@@ -51,13 +55,8 @@ public class MatchScoreController extends HttpServlet {
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException,ServletException {
         long playerId = Long.parseLong(request.getParameter("player-id"));
         match = new MatchScore().getMatchScore(match,playerId);
-        if (match.getPlayer1Set() == 2) {
+        if (match.isFinished()) {
             new FinishedMatchesPersistenceService().saveFinishedMatch(match);
-            match.setFinished(true);
-        } else if (match.getPlayer2Set() == 2) {
-            new FinishedMatchesPersistenceService().saveFinishedMatch(match);
-            match.setFinished(true);
-            match.setPlayer2Win(true);
         }
         MatchMap.updateCurrentMatch(matchId,match);
         response.sendRedirect("match-score?uuid=" + matchId);
