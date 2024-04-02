@@ -41,6 +41,9 @@
       </td>
     </tr>
   </table>
+  <p>
+    <a href="matches">Завершенные матчи</a>
+  </p>
 </div>
 </body>
 </html>

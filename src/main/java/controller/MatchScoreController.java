@@ -23,12 +23,26 @@ public class MatchScoreController extends HttpServlet {
         if (match == null) {
             match = MatchMap.currentMatch.get(matchId);
         }
-        String player1 = new PlayersRepository().findById(match.getPlayer1Id()).get().getName();
-        String player2 = new PlayersRepository().findById(match.getPlayer2Id()).get().getName();
+        String player1 = new PlayersRepository().findById(match.getPlayer1Id()).orElseThrow().getName();
+        String player2 = new PlayersRepository().findById(match.getPlayer2Id()).orElseThrow().getName();
+        String player1Score = String.valueOf(match.getPlayer1Score());
+        String player2Score = String.valueOf(match.getPlayer2Score());
+        if (match.isOverScore()) {
+            if (match.getPlayer1Score() == 1) {
+                player1Score = "40 больше";
+                player2Score = "40 меньше";
+            } else if (match.getPlayer2Score() == 1) {
+                player1Score = "40 меньше";
+                player2Score = "40 больше";
+            } else {
+                player1Score = "40 ровно";
+                player2Score = "40 ровно";
+            }
+        }
         request.setAttribute("player1name",player1);
         request.setAttribute("player2name",player2);
-        request.setAttribute("score1",match.getPlayer1Score());
-        request.setAttribute("score2",match.getPlayer2Score());
+        request.setAttribute("score1",player1Score);
+        request.setAttribute("score2",player2Score);
         request.setAttribute("player1id",match.getPlayer1Id());
         request.setAttribute("player2id",match.getPlayer2Id());
         request.setAttribute("game1",match.getPlayer1Game());
@@ -45,7 +59,7 @@ public class MatchScoreController extends HttpServlet {
             MatchMap.deleteFinishedMatch(matchId);
         } else if (match.isTieBreak()) {
             request.setAttribute("finish","Тай-брейк!");
-        } else {
+        }  else {
             request.setAttribute("finish","");
         }
         RequestDispatcher dispatcher = request.getRequestDispatcher("match-score.jsp");

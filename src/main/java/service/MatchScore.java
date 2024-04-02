@@ -30,7 +30,10 @@ public class MatchScore {
                 return getPlayer1GameScore(match);
             }
             case -1 -> match.setZeroScores();
-            case 0 -> match.setPlayer1Score((byte) (scorePlayer1 + 1));
+            case 0 -> {
+                match.setZeroScores();
+                match.setPlayer1Score((byte) 1);
+            }
         }
         return match;
     }
@@ -58,7 +61,7 @@ public class MatchScore {
             case 15 -> match.setPlayer1Score((byte) 30);
             case 30 -> {
                 if (match.getPlayer2Score() == 40) {
-                    match.setZeroScores();
+                    match.setPlayer1Score((byte) 40);
                     match.setOverScore(true);
                 } else {
                     match.setPlayer1Score((byte) 40);
@@ -94,25 +97,14 @@ public class MatchScore {
         byte scoreDifference = (byte) (scorePlayer2- match.getPlayer1Score());
         switch (scoreDifference) {
             case 1 -> {
-                match.setPlayer2Game((byte) (match.getPlayer2Game() + 1));
-                match.setZeroScores();
                 match.setOverScore(false);
-                byte player1Game = match.getPlayer1Game();
-                byte player2Game = match.getPlayer2Game();
-                if (player2Game == 7 || player2Game == 6 && player1Game <= 4) {
-                    match.setZeroGames();
-                    match.setPlayer2Set((byte) (match.getPlayer2Set() + 1));
-                    if (match.getPlayer2Set() == 2) {
-                        match.setFinished(true);
-                        match.setPlayer2Win(true);
-                    }
-                } else if (player2Game == 6 && player1Game == 6) {
-                    match.setZeroGames();
-                    match.setTieBreak(true);
-                }
+                return getPlayer2GameScore(match);
             }
             case -1 -> match.setZeroScores();
-            case 0 -> match.setPlayer2Score((byte) (scorePlayer2 + 1));
+            case 0 -> {
+                match.setZeroScores();
+                match.setPlayer2Score((byte) 1);
+            }
         }
         return match;
     }
@@ -140,7 +132,7 @@ public class MatchScore {
             case 15 -> match.setPlayer2Score((byte) 30);
             case 30 -> {
                 if (match.getPlayer1Score() == 40) {
-                    match.setZeroScores();
+                    match.setPlayer2Score((byte) 40);
                     match.setOverScore(true);
                 } else {
                     match.setPlayer2Score((byte) 40);

@@ -1,6 +1,7 @@
 #wrapper {
     max-width: 960px;
     margin: auto;
+    background-image: url("/image/fon-tennis.jpg");
 }
 header {
     padding: 20px 0;
@@ -9,3 +10,4 @@ header {
 table,tr,td {
     border: 1px solid black;
 }
+
