@@ -19,7 +19,8 @@ public class NewMatchController extends HttpServlet {
 
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-
+        RequestDispatcher dispatcher = request.getRequestDispatcher("new-match.jsp");
+        dispatcher.forward(request,response);
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {

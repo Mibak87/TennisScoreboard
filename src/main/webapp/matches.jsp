@@ -9,12 +9,15 @@
 <div id="wrapper">
     <h1><%= "Завершенные матчи" %></h1>
     <p>
+        <a href="new-match">Новый матч</a>
+    </p>
+    <p>
     <form name="NewMatch" action="matches" method="get">
         <input type="text" name="filter_by_player_name" placeholder="Имя игрока">
         <button type="submit">Поиск</button>
     </form>
     </p>
-    <table>
+    <table class="table-center">
         <tr>
             <td>Игрок 1</td>
             <td>Игрок 2</td>

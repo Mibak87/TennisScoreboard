@@ -9,7 +9,7 @@
 <div id="wrapper">
   <p>Счет матча</p>
   <p>${finish}</p>
-  <table>
+  <table class="table-center">
     <tr>
       <td>Имя</td>
       <td>Очки</td>
