@@ -42,7 +42,7 @@
     </tr>
   </table>
   <p>
-    <a href="matches">Завершенные матчи</a>
+    <a href="matches" class="href-button">Завершенные матчи</a>
   </p>
 </div>
 </body>

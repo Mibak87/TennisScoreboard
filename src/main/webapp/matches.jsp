@@ -9,7 +9,7 @@
 <div id="wrapper">
     <h1><%= "Завершенные матчи" %></h1>
     <p>
-        <a href="new-match">Новый матч</a>
+        <a href="new-match" class="href-button">Новый матч</a>
     </p>
     <p>
     <form name="NewMatch" action="matches" method="get">

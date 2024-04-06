@@ -1,8 +1,13 @@
+body {
+    background-image: url("image/fon-tennis.jpg");
+}
+
 #wrapper {
     max-width: 600px;
     margin: auto;
-    background-color: #FBB631;
+    background-color: #6490ec;
     text-align: center;
+    padding: 20px 0;
 }
 .table-center {
     margin: 0 auto;
@@ -13,19 +18,34 @@ header {
     padding: 20px 0;
 }
 
-tr, td {
-    border: 1px solid black;
+tr {
     height: 25px;
 }
 
+td {
+    border: 1px solid black;
+    text-align: center;
+}
+
+button {
+    display: table-cell;
+    vertical-align: middle;
+}
+
 .href-button {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 150px; /* Фиксированная ширина кнопки */
+    height: 30px; /* Фиксированная высота кнопки */
     background-color: #edf6ff; /* Цвет фона */
     color: #1b4268; /* Цвет текста */
     font: bold 0.8em Arial, Tahoma, sans-serif; /* Параметры шрифта */
     border: 1px solid #d4dde5; /* Параметры рамки */
-    padding: 0.5rem 1.5rem; /* Расстояние от рамки до текста */
+    /*padding: 0.5rem 1rem; /* Расстояние от рамки до текста */
     text-decoration: none; /* Убираем подчёркивание */
     transition: 0.5s; /* Время перехода */
+    text-align: center; /* Выравниваем текст по центру */
 }
 .href-button:hover {
     background-color: #f60; /* Цвет фона */
