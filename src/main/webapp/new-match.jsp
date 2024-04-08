@@ -16,6 +16,7 @@
             <button type="submit">Начать</button>
         </form>
         </p>
+        <p>${validation_error}</p>
 
     <section></section>
 </div>
