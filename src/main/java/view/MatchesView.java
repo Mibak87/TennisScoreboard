@@ -31,12 +31,12 @@ public class MatchesView {
             request.setAttribute("winner_" + (i - start),matches.getWinner().getName());
         }
         if (pageNumber == 1) {
-            request.setAttribute("button1_hidden","hidden");
+            request.setAttribute("button1_hidden","disabled");
         } else {
             request.setAttribute("button1_hidden","");
         }
         if (pageNumber == (matchesList.size() / 5) + 1) {
-            request.setAttribute("button2_hidden","hidden");
+            request.setAttribute("button2_hidden","disabled");
         } else {
             request.setAttribute("button2_hidden","");
         }

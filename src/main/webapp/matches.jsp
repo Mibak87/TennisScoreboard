@@ -49,14 +49,16 @@
             <td>${winner_4}</td>
         </tr>
     </table>
+    <p>
     <form action="matches">
         <input type="hidden" name="page" value=${page_number_last}>
-        <button type="submit" ${button1_hidden}>Предыдущая страница</button>
+        <button type="submit" class="page_button" ${button1_hidden}>Предыдущая страница</button>
     </form>
     <form action="matches">
         <input type="hidden" name="page" value=${page_number_next}>
-        <button type="submit" ${button2_hidden}>Следующая страница</button>
+        <button type="submit" class="page_button" ${button2_hidden}>Следующая страница</button>
     </form>
+    </p>
 </div>
 </body>
 </html>

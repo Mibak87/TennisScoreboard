@@ -32,6 +32,15 @@ button {
     vertical-align: middle;
 }
 
+form {
+    display: inline;
+}
+
+.page_button {
+    display: inline-block;
+    margin-right: 10px;
+}
+
 .href-button {
     display: inline-flex;
     justify-content: center;
