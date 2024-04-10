@@ -1,8 +1,8 @@
 package service;
 
 public class MatchScore {
-    public Match getMatchScore(Match match, long playerId) {
-        if (match.getPlayer1Id() == playerId) {
+    public Match getMatchScore(Match match, int playerId) {
+        if (playerId == 1) {
             if (match.isOverScore()) {
                 return getPlayer1WinOverScore(match);
             } else if (match.isTieBreak()) {
@@ -155,6 +155,7 @@ public class MatchScore {
             match.setPlayer2Set((byte) (match.getPlayer2Set() + 1));
             if (match.getPlayer2Set() == 2) {
                 match.setFinished(true);
+                match.setPlayer2Win(true);
             }
         } else if (player2Game == 6 && player1Game == 6) {
             match.setZeroGames();

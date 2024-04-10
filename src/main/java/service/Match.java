@@ -1,13 +1,14 @@
 package service;
 
+import entity.Players;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
 public class Match {
-    private long player1Id;
-    private long player2Id;
+    private Players player1;
+    private Players player2;
     private byte player1Score;
     private byte player2Score;
     private byte player1Game;
@@ -20,9 +21,9 @@ public class Match {
     private boolean finished;
 
 
-    public Match(long player1Id, long player2Id) {
-        this.player1Id = player1Id;
-        this.player2Id = player2Id;
+    public Match(Players player1, Players player2) {
+        this.player1 = player1;
+        this.player2 = player2;
         player1Score = 0;
         player2Score = 0;
         player1Game = 0;

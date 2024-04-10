@@ -23,7 +23,7 @@
       <td>${set1}</td>
       <td>
         <form name="MatchScore" action="match-score" method="post">
-          <input type="hidden" name="player-id" value=${player1id}>
+          <input type="hidden" name="player-id" value="1">
           <button type="submit" ${button_disabled}>${player1name} выиграл</button>
         </form>
       </td>
@@ -35,7 +35,7 @@
       <td>${set2}</td>
       <td>
         <form name="MatchScore" action="match-score" method="post">
-          <input type="hidden" name="player-id" value=${player2id}>
+          <input type="hidden" name="player-id" value="2">
           <button type="submit" ${button_disabled}>${player2name} выиграл</button>
         </form>
       </td>

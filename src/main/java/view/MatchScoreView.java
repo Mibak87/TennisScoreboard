@@ -1,15 +1,13 @@
 package view;
 
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import repository.PlayersRepository;
 import service.Match;
 
 public class MatchScoreView {
 
     public void renderingMatchScore(HttpServletRequest request, Match match) {
-        String player1 = new PlayersRepository().findById(match.getPlayer1Id()).orElseThrow().getName();
-        String player2 = new PlayersRepository().findById(match.getPlayer2Id()).orElseThrow().getName();
+        String player1 = match.getPlayer1().getName();
+        String player2 = match.getPlayer2().getName();
         String player1Score = String.valueOf(match.getPlayer1Score());
         String player2Score = String.valueOf(match.getPlayer2Score());
         if (match.isOverScore()) {
@@ -28,8 +26,6 @@ public class MatchScoreView {
         request.setAttribute("player2name",player2);
         request.setAttribute("score1",player1Score);
         request.setAttribute("score2",player2Score);
-        request.setAttribute("player1id",match.getPlayer1Id());
-        request.setAttribute("player2id",match.getPlayer2Id());
         request.setAttribute("game1",match.getPlayer1Game());
         request.setAttribute("game2",match.getPlayer2Game());
         request.setAttribute("set1",match.getPlayer1Set());

@@ -29,7 +29,7 @@ public class MatchScoreController extends HttpServlet {
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException,ServletException {
-        long playerId = Long.parseLong(request.getParameter("player-id"));
+        int playerId = Integer.parseInt(request.getParameter("player-id"));
         match = new MatchScore().getMatchScore(match,playerId);
         if (match.isFinished()) {
             new FinishedMatchesPersistenceService().saveFinishedMatch(match);
