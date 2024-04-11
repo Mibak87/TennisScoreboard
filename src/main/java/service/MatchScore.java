@@ -1,18 +1,25 @@
 package service;
 
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 public class MatchScore {
+
+    private static final Logger logger = LogManager.getLogger(MatchScore.class);
+
     public Match getMatchScore(Match match, int playerId) {
         if (playerId == 1) {
-            if (match.isOverScore()) {
-                return getPlayer1WinOverScore(match);
+            if (match.isDeuce()) {
+                return getPlayer1WinDeuce(match);
             } else if (match.isTieBreak()) {
                 return getPlayer1WinTieBreak(match);
             } else {
                 return getPlayer1WinScore(match);
             }
         } else {
-            if (match.isOverScore()) {
-                return getPlayer2WinOverScore(match);
+            if (match.isDeuce()) {
+                return getPlayer2WinDeuce(match);
             } else if (match.isTieBreak()) {
                 return getPlayer2WinTieBreak(match);
             } else {
@@ -21,18 +28,22 @@ public class MatchScore {
         }
     }
 
-    private Match getPlayer1WinOverScore(Match match) {
+    private Match getPlayer1WinDeuce(Match match) {
         byte scorePlayer1 = match.getPlayer1Score();
         byte scoreDifference = (byte) (scorePlayer1- match.getPlayer2Score());
         switch (scoreDifference) {
             case 1 -> {
-                match.setOverScore(false);
+                match.setDeuce(false);
                 return getPlayer1GameScore(match);
             }
-            case -1 -> match.setZeroScores();
+            case -1 -> {
+                match.setZeroScores();
+                logger.info("Players have equals scores.");
+            }
             case 0 -> {
                 match.setZeroScores();
                 match.setPlayer1Score((byte) 1);
+                logger.info("Player1 is on advantage.");
             }
         }
         return match;
@@ -57,12 +68,20 @@ public class MatchScore {
 
     private Match getPlayer1WinScore(Match match) {
         switch (match.getPlayer1Score()) {
-            case 0 -> match.setPlayer1Score((byte) 15);
-            case 15 -> match.setPlayer1Score((byte) 30);
+            case 0 -> {
+                match.setPlayer1Score((byte) 15);
+                logger.info("Player1 gets 15 points.");
+            }
+            case 15 -> {
+                match.setPlayer1Score((byte) 30);
+                logger.info("Player1 gets 30 points.");
+            }
             case 30 -> {
+                logger.info("Player1 gets 40 points.");
                 if (match.getPlayer2Score() == 40) {
                     match.setPlayer1Score((byte) 40);
-                    match.setOverScore(true);
+                    match.setDeuce(true);
+                    logger.info("Playing deuce.");
                 } else {
                     match.setPlayer1Score((byte) 40);
                 }
@@ -75,6 +94,7 @@ public class MatchScore {
     }
 
     private Match getPlayer1GameScore(Match match) {
+        logger.info("Player1 wins this game.");
         match.setZeroScores();
         match.setPlayer1Game((byte) (match.getPlayer1Game() + 1));
         byte player1Game = match.getPlayer1Game();
@@ -82,28 +102,36 @@ public class MatchScore {
         if (player1Game == 7 || player1Game == 6 && player2Game <= 4) {
             match.setZeroGames();
             match.setPlayer1Set((byte) (match.getPlayer1Set() + 1));
+            logger.info("Player1 wins this set.");
             if (match.getPlayer1Set() == 2) {
                 match.setFinished(true);
+                logger.info("Match is finished.");
             }
         } else if (player1Game == 6 && player2Game == 6) {
             match.setZeroGames();
             match.setTieBreak(true);
+            logger.info("Playing tie-break.");
         }
+
         return match;
     }
 
-    private Match getPlayer2WinOverScore(Match match) {
+    private Match getPlayer2WinDeuce(Match match) {
         byte scorePlayer2 = match.getPlayer2Score();
         byte scoreDifference = (byte) (scorePlayer2- match.getPlayer1Score());
         switch (scoreDifference) {
             case 1 -> {
-                match.setOverScore(false);
+                match.setDeuce(false);
                 return getPlayer2GameScore(match);
             }
-            case -1 -> match.setZeroScores();
+            case -1 -> {
+                match.setZeroScores();
+                logger.info("Players have equals scores.");
+            }
             case 0 -> {
                 match.setZeroScores();
                 match.setPlayer2Score((byte) 1);
+                logger.info("Player2 is on advantage.");
             }
         }
         return match;
@@ -119,6 +147,7 @@ public class MatchScore {
             match.setPlayer2Set((byte) (match.getPlayer2Set() + 1));
             if (match.getPlayer2Set() == 2) {
                 match.setFinished(true);
+                logger.info("Match is finished.");
             }
         } else {
             match.setPlayer2Game(gamePlayer2);
@@ -128,12 +157,20 @@ public class MatchScore {
 
     private Match getPlayer2WinScore(Match match) {
         switch (match.getPlayer2Score()) {
-            case 0 -> match.setPlayer2Score((byte) 15);
-            case 15 -> match.setPlayer2Score((byte) 30);
+            case 0 -> {
+                match.setPlayer2Score((byte) 15);
+                logger.info("Player2 gets 15 points.");
+            }
+            case 15 -> {
+                match.setPlayer2Score((byte) 30);
+                logger.info("Player2 gets 30 points.");
+            }
             case 30 -> {
+                logger.info("Player2 gets 40 points.");
                 if (match.getPlayer1Score() == 40) {
                     match.setPlayer2Score((byte) 40);
-                    match.setOverScore(true);
+                    match.setDeuce(true);
+                    logger.info("Playing deuce.");
                 } else {
                     match.setPlayer2Score((byte) 40);
                 }
@@ -146,6 +183,7 @@ public class MatchScore {
     }
 
     private Match getPlayer2GameScore(Match match) {
+        logger.info("Player2 wins this game.");
         match.setZeroScores();
         match.setPlayer2Game((byte) (match.getPlayer2Game() + 1));
         byte player1Game = match.getPlayer1Game();
@@ -153,13 +191,16 @@ public class MatchScore {
         if (player2Game == 7 || player2Game == 6 && player1Game <= 4) {
             match.setZeroGames();
             match.setPlayer2Set((byte) (match.getPlayer2Set() + 1));
+            logger.info("Player1 wins this set.");
             if (match.getPlayer2Set() == 2) {
                 match.setFinished(true);
                 match.setPlayer2Win(true);
+                logger.info("Match is finished.");
             }
         } else if (player2Game == 6 && player1Game == 6) {
             match.setZeroGames();
             match.setTieBreak(true);
+            logger.info("Playing tie-break.");
         }
         return match;
     }

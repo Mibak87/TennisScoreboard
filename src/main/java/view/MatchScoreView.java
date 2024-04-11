@@ -10,7 +10,7 @@ public class MatchScoreView {
         String player2 = match.getPlayer2().getName();
         String player1Score = String.valueOf(match.getPlayer1Score());
         String player2Score = String.valueOf(match.getPlayer2Score());
-        if (match.isOverScore()) {
+        if (match.isDeuce()) {
             if (match.getPlayer1Score() == 1) {
                 player1Score = "40 больше";
                 player2Score = "40 меньше";

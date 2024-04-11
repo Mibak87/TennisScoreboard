@@ -8,12 +8,14 @@ import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import service.Match;
 import service.MatchMap;
 
 @WebServlet(name = "NewMatchController", value = "/new-match")
 public class NewMatchController extends HttpServlet {
-
+    private static final Logger logger = LogManager.getLogger(NewMatchController.class);
 
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
@@ -29,6 +31,7 @@ public class NewMatchController extends HttpServlet {
         UUID matchId = UUID.randomUUID();
         Match currentMatch = new Match(player1, player2);
         MatchMap.updateCurrentMatch(matchId, currentMatch);
+        logger.info("The match has been created. Players: " + player1Name + " and " + player2Name + ".");
         response.sendRedirect("match-score?uuid=" + matchId);
     }
 

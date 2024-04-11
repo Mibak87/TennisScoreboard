@@ -16,7 +16,7 @@ public class Match {
     private byte player1Set;
     private byte player2Set;
     private boolean player2Win;
-    private boolean overScore;
+    private boolean deuce;
     private boolean tieBreak;
     private boolean finished;
 
@@ -31,7 +31,7 @@ public class Match {
         player1Set = 0;
         player2Set = 0;
         player2Win = false;
-        overScore = false;
+        deuce = false;
         tieBreak = false;
         finished = false;
     }
