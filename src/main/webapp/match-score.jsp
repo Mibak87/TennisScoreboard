@@ -8,7 +8,7 @@
 <body>
 <div id="wrapper">
   <p>Счет матча</p>
-  <p>${finish}</p>
+  <p>${matchScore.finish}</p>
   <table class="table-center">
     <tr>
       <td>Имя</td>
@@ -17,26 +17,26 @@
       <td>Сет</td>
     </tr>
     <tr>
-      <td>${player1name}</td>
-      <td>${score1}</td>
-      <td>${game1}</td>
-      <td>${set1}</td>
+      <td>${matchScore.player1Name}</td>
+      <td>${matchScore.player1Score}</td>
+      <td>${matchScore.player1Game}</td>
+      <td>${matchScore.player1Set}</td>
       <td>
         <form name="MatchScore" action="match-score" method="post">
           <input type="hidden" name="player-id" value="1">
-          <button type="submit" ${button_disabled}>${player1name} выиграл</button>
+          <button type="submit" ${matchScore.buttonDisabled}>${matchScore.player1Name} выиграл</button>
         </form>
       </td>
     </tr>
     <tr>
-      <td>${player2name}</td>
-      <td>${score2}</td>
-      <td>${game2}</td>
-      <td>${set2}</td>
+      <td>${matchScore.player2Name}</td>
+      <td>${matchScore.player2Score}</td>
+      <td>${matchScore.player2Game}</td>
+      <td>${matchScore.player2Set}</td>
       <td>
         <form name="MatchScore" action="match-score" method="post">
           <input type="hidden" name="player-id" value="2">
-          <button type="submit" ${button_disabled}>${player2name} выиграл</button>
+          <button type="submit" ${matchScore.buttonDisabled}>${matchScore.player2Name} выиграл</button>
         </form>
       </td>
     </tr>
