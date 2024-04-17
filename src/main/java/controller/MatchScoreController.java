@@ -15,14 +15,10 @@ import service.MatchScore;
 
 @WebServlet(name = "MatchScoreController", value = "/match-score")
 public class MatchScoreController extends HttpServlet {
-    private UUID matchId;
-    private Match match;
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException,ServletException {
-        matchId = UUID.fromString(request.getParameter("uuid"));
-        if (match == null) {
-            match = MatchMap.currentMatch.get(matchId);
-        }
+        UUID matchId = UUID.fromString(request.getParameter("uuid"));
+        Match match = MatchMap.currentMatch.get(matchId);
         String player1Score = String.valueOf(match.getPlayer1Score());
         String player2Score = String.valueOf(match.getPlayer2Score());
         if (match.isDeuce()) {
@@ -67,6 +63,8 @@ public class MatchScoreController extends HttpServlet {
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException,ServletException {
+        UUID matchId = UUID.fromString(request.getParameter("uuid"));
+        Match match = MatchMap.currentMatch.get(matchId);
         int playerId = Integer.parseInt(request.getParameter("player-id"));
         match = new MatchScore().getMatchScore(match,playerId);
         if (match.isFinished()) {
