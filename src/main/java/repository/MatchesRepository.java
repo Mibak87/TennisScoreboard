@@ -39,10 +39,15 @@ public class MatchesRepository implements ScoreboardRepository<Matches> {
 
     @Override
     public void save(Matches matches) throws HibernateException {
+        Transaction transaction = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            Transaction transaction = session.beginTransaction();
+            transaction = session.beginTransaction();
             session.persist(matches);
             transaction.commit();
+        } catch (HibernateException e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
         }
     }
 }

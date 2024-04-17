@@ -21,10 +21,15 @@ public class PlayersRepository implements ScoreboardRepository<Players> {
 
     @Override
     public void save(Players players) throws HibernateException {
+        Transaction transaction = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            Transaction transaction = session.beginTransaction();
+            transaction = session.beginTransaction();
             session.persist(players);
             transaction.commit();
+        } catch (HibernateException e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
         }
     }
 
