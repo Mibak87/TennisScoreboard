@@ -16,5 +16,6 @@ public class MatchScoreDTO {
     private byte player2Set;
     private String finish;
     private String buttonDisabled;
+    private String uuid;
 
 }
