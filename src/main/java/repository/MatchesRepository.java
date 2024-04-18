@@ -50,4 +50,15 @@ public class MatchesRepository implements ScoreboardRepository<Matches> {
             }
         }
     }
+
+    public List<Matches> findFromRangeForPagination(int pageLimit, int pageNumber) {
+        int offsetNumber = pageLimit * (pageNumber - 1);
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            String hql = "FROM Matches";
+            Query query = session.createQuery(hql);
+            query.setMaxResults(pageLimit);
+            query.setFirstResult(offsetNumber);
+            return query.list();
+        }
+    }
 }

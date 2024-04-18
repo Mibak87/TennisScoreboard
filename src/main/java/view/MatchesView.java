@@ -17,17 +17,15 @@ public class MatchesView {
         String filterPlayer = request.getParameter("filter_by_player_name");
         List<Matches> matchesList;
         if (filterPlayer == null || filterPlayer.equals("")) {
-            matchesList = new MatchesRepository().findAll();
+            matchesList = new MatchesRepository().findFromRangeForPagination(5,pageNumber);
         } else {
             matchesList = new MatchesRepository().findByName(filterPlayer);
         }
-        int start = 5*pageNumber - 5;
-        int limit = Math.min (5*pageNumber - 1, matchesList.size() - 1);
-        for (int i = start; i <= limit; i++) {
+        for (int i = 0; i <= matchesList.size() - 1; i++) {
             Matches matches = matchesList.get(i);
-            request.setAttribute("player1_" + (i - start),matches.getPlayer1().getName());
-            request.setAttribute("player2_" + (i - start),matches.getPlayer2().getName());
-            request.setAttribute("winner_" + (i - start),matches.getWinner().getName());
+            request.setAttribute("player1_" + i,matches.getPlayer1().getName());
+            request.setAttribute("player2_" + i,matches.getPlayer2().getName());
+            request.setAttribute("winner_" + i,matches.getWinner().getName());
         }
         if (pageNumber == 1) {
             request.setAttribute("button1_hidden","disabled");
