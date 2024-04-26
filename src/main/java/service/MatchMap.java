@@ -1,13 +1,15 @@
 package service;
 
+import dto.MatchDto;
+
 import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class MatchMap {
-    public static Map<UUID,Match> currentMatch;
+    public static Map<UUID,MatchDto> currentMatch;
 
-    public static void updateCurrentMatch(UUID matchId, Match match) {
+    public static void updateCurrentMatch(UUID matchId, MatchDto match) {
         if (currentMatch == null) {
             currentMatch = new ConcurrentHashMap<>();
         }

@@ -5,7 +5,7 @@ import lombok.*;
 @Getter
 @Setter
 @Builder
-public class MatchScoreDTO {
+public class MatchScoreDto {
     private String player1Name;
     private String player2Name;
     private String player1Score;

@@ -1,13 +1,13 @@
 package utils;
 
-import dto.MatchScoreDTO;
+import dto.MatchScoreDto;
 import service.Match;
 import service.MatchMap;
 
 import java.util.UUID;
 
 public class DtoUtil {
-    public MatchScoreDTO getMatchScoreDTO(UUID matchId) {
+    public MatchScoreDto getMatchScoreDTO(UUID matchId) {
         Match match = MatchMap.currentMatch.get(matchId);
         String player1Score = String.valueOf(match.getPlayer1Score());
         String player2Score = String.valueOf(match.getPlayer2Score());
@@ -35,7 +35,7 @@ public class DtoUtil {
         } else if (match.isTieBreak()) {
             finish = "Тай-брейк!";
         }
-        MatchScoreDTO matchScoreDTO = MatchScoreDTO.builder()
+        MatchScoreDto matchScoreDTO = MatchScoreDto.builder()
                 .player1Name(match.getPlayer1().getName())
                 .player2Name(match.getPlayer2().getName())
                 .player1Score(player1Score)

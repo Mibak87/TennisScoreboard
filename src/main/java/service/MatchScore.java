@@ -1,15 +1,32 @@
 package service;
 
 
+import dto.MatchDto;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import service.scores.Deuce;
+import service.scores.Points;
+
+import java.util.UUID;
 
 public class MatchScore {
 
     private static final Logger logger = LogManager.getLogger(MatchScore.class);
 
+    public void getScore(UUID matchId,int playerWinId) {
+        MatchDto match = MatchMap.currentMatch.get(matchId);
+        Points points = new Points(match.getPlayer1Points(),match.getPlayer2Points());
+        if (match.isDeuce()) {
+            new Deuce().getScore(points,playerWinId);
+        } else if (match.isTieBreak()) {
+
+        } else {
+
+        }
+        MatchMap.updateCurrentMatch(matchId,match);
+    }
     public Match getMatchScore(Match match, int playerId) {
-        if (playerId == 1) {
+        if (playerId == 0) {
             if (match.isDeuce()) {
                 return getPlayer1WinDeuce(match);
             } else if (match.isTieBreak()) {
