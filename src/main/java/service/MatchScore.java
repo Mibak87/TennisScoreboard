@@ -17,15 +17,15 @@ public class MatchScore {
         Points points = new Points(match.getPlayer1Points(),match.getPlayer2Points());
         Sets sets = new Sets(match.getPlayer1Set(),match.getPlayer2Set());
         Scores scores = new Scores(points,sets);
-        Points pointsAfterUpdate;
+        Scores scoresAfterUpdate;
         if (match.isDeuce()) {
             new Deuce().getScore(scores,playerWinId);
         } else if (match.isTieBreak()) {
             new TieBreak().getScore(scores,playerWinId);
         } else {
-            pointsAfterUpdate = new RegularGame().getScore(points,playerWinId);
-            if (pointsAfterUpdate.getPlayer1Points().equals("40") &&
-                pointsAfterUpdate.getPlayer2Points().equals("40")) {
+            scoresAfterUpdate = new RegularGame().getScore(scores,playerWinId);
+            if (scoresAfterUpdate.getPoints().getPlayer1Points().equals("40") &&
+                    scoresAfterUpdate.getPoints().getPlayer2Points().equals("40")) {
                 match.setDeuce(true);
                 logger.info("Playing deuce.");
             }

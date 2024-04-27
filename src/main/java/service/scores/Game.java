@@ -1,7 +1,7 @@
 package service.scores;
 
 public class Game {
-    public void getScore() {
+    public Scores getScore(Scores scores,int playerWinId) {
 
     }
 }
