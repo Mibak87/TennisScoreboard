@@ -1,7 +1,7 @@
 package service.scores;
 
 public class TieBreak {
-    public void getScore(Points points, int playerWinId) {
+    public void getScore(Scores scores, int playerWinId) {
 
     }
 }

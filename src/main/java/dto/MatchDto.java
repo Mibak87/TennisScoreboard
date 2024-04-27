@@ -14,8 +14,8 @@ public class MatchDto {
     private Players playerWin;
     private String player1Points;
     private String player2Points;
-    private List<Integer> player1set;
-    private List<Integer> player2set;
+    private List<Integer> player1Set;
+    private List<Integer> player2Set;
     private boolean deuce;
     private boolean tieBreak;
     private boolean finished;
