@@ -13,14 +13,16 @@
     <tr>
       <td>Имя</td>
       <td>Очки</td>
-      <td>Гейм</td>
-      <td>Сет</td>
+      <td>Сет1</td>
+      <td>Сет2</td>
+      <td>Сет3</td>
     </tr>
     <tr>
       <td>${matchScore.player1Name}</td>
-      <td>${matchScore.player1Score}</td>
-      <td>${matchScore.player1Game}</td>
-      <td>${matchScore.player1Set}</td>
+      <td>${matchScore.player1Points}</td>
+      <td>${matchScore.player1Set.get(0)}</td>
+      <td>${matchScore.player1Set.get(1)}</td>
+      <td>${matchScore.player1Set.get(2)}</td>
       <td>
         <form name="MatchScore" action="match-scores?uuid=${matchScore.uuid}" method="post">
           <input type="hidden" name="player-id" value="1">
@@ -30,9 +32,10 @@
     </tr>
     <tr>
       <td>${matchScore.player2Name}</td>
-      <td>${matchScore.player2Score}</td>
-      <td>${matchScore.player2Game}</td>
-      <td>${matchScore.player2Set}</td>
+      <td>${matchScore.player2Points}</td>
+      <td>${matchScore.player2Set.get(0)}</td>
+      <td>${matchScore.player2Set.get(1)}</td>
+      <td>${matchScore.player2Set.get(2)}</td>
       <td>
         <form name="MatchScore" action="match-scores?uuid=${matchScore.uuid}" method="post">
           <input type="hidden" name="player-id" value="2">

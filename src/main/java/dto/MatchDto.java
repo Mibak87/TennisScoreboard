@@ -23,5 +23,7 @@ public class MatchDto {
     public MatchDto(Players player1, Players player2) {
         this.player1 = player1;
         this.player2 = player2;
+        player1Points = "0";
+        player2Points = "0";
     }
 }

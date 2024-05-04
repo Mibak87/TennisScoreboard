@@ -1,51 +1,68 @@
 package service;
 
+import dto.MatchDto;
 import entity.Players;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class MatchScoreTest {
-    Match testMatch;
+    MatchDto testMatch;
+    UUID matchId;
 
     @BeforeEach
     void init() {
         Players player1 = new Players("Иванов");
         Players player2 = new Players("Петров");
-        testMatch = new Match(player1,player2);
+        testMatch = new MatchDto(player1,player2);
+        matchId = UUID.randomUUID();
     }
 
     @Test
     void playerWinPointWithScoreThenWinGame() {
-        testMatch.setPlayer1Score((byte) 40);
-        byte player1Game = new MatchScore().getMatchScore(testMatch,1).getPlayer1Game();
-        assertEquals((byte) 1,player1Game);
+        testMatch.setPlayer1Points("40");
+        MatchMap.updateCurrentMatch(matchId, testMatch);
+        new MatchScore().getMatchScore(matchId,1);
+        MatchDto match = MatchMap.currentMatch.get(matchId);
+        assertEquals(1,match.getPlayer1Set().get(0));
     }
 
     @Test
-    void overScoreModeActivate() {
-        testMatch.setPlayer1Score((byte) 30);
-        testMatch.setPlayer2Score((byte) 40);
-        boolean overScoreMode = new MatchScore().getMatchScore(testMatch,1).isDeuce();
-        assertTrue(overScoreMode);
+    void deuceModeActivate() {
+        testMatch.setPlayer1Points("30");
+        testMatch.setPlayer2Points("40");
+        MatchMap.updateCurrentMatch(matchId, testMatch);
+        new MatchScore().getMatchScore(matchId,1);
+        boolean deuceMode = MatchMap.currentMatch.get(matchId).isDeuce();
+        assertTrue(deuceMode);
     }
 
     @Test
-    void playerNotWinGameWhenWinOneTimeWithOverScore() {
-        testMatch.setPlayer1Score((byte) 40);
-        testMatch.setPlayer2Score((byte) 40);
+    void playerNotWinGameWhenWinOneTimeWithDeuce() {
+        testMatch.setPlayer1Points("40");
+        testMatch.setPlayer2Points("40");
         testMatch.setDeuce(true);
-        byte player1Game = new MatchScore().getMatchScore(testMatch,1).getPlayer1Game();
+        MatchMap.updateCurrentMatch(matchId, testMatch);
+        int player1Game = MatchMap.currentMatch.get(matchId).getPlayer1Set().get(0);
         assertNotEquals(1,player1Game);
     }
 
     @Test
     void tieBreakActivate() {
-        testMatch.setPlayer1Game((byte) 5);
-        testMatch.setPlayer2Game((byte) 6);
-        testMatch.setPlayer1Score((byte) 40);
-        boolean tieBreak = new MatchScore().getMatchScore(testMatch,1).isTieBreak();
+        List<Integer> player1Set = new ArrayList<>();
+        List<Integer> player2Set = new ArrayList<>();
+        player1Set.add(5);
+        player2Set.add(6);
+        testMatch.setPlayer1Set(player1Set);
+        testMatch.setPlayer2Set(player2Set);
+        testMatch.setPlayer1Points("40");
+        MatchMap.updateCurrentMatch(matchId, testMatch);
+        boolean tieBreak = MatchMap.currentMatch.get(matchId).isTieBreak();
         assertTrue(tieBreak);
     }
 }
