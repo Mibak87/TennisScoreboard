@@ -3,6 +3,7 @@ package controller;
 import java.io.*;
 import java.util.UUID;
 
+import dto.MatchDto;
 import entity.Players;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -10,7 +11,6 @@ import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import service.Match;
 import service.MatchMap;
 
 @WebServlet(name = "NewMatchController", value = "/new-match")
@@ -29,7 +29,7 @@ public class NewMatchController extends HttpServlet {
         Players player1 = new Players(player1Name);
         Players player2 = new Players(player2Name);
         UUID matchId = UUID.randomUUID();
-        Match currentMatch = new Match(player1, player2);
+        MatchDto currentMatch = new MatchDto(player1, player2);
         MatchMap.updateCurrentMatch(matchId, currentMatch);
         logger.info("The match has been created. Players: " + player1Name + " and " + player2Name + ".");
         response.sendRedirect("match-score?uuid=" + matchId);

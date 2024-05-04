@@ -19,4 +19,9 @@ public class MatchDto {
     private boolean deuce;
     private boolean tieBreak;
     private boolean finished;
+
+    public MatchDto(Players player1, Players player2) {
+        this.player1 = player1;
+        this.player2 = player2;
+    }
 }

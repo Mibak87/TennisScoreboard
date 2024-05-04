@@ -1,13 +1,20 @@
 package service.scores;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-@AllArgsConstructor
 public class Scores {
     private Points points;
     private Sets sets;
+    private boolean deuce;
+    private boolean tieBreak;
+    private boolean finished;
+    private int playerWinId;
+
+    public Scores(Points points, Sets sets) {
+        this.points = points;
+        this.sets = sets;
+    }
 }

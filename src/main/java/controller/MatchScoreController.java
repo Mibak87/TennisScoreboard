@@ -3,13 +3,13 @@ package controller;
 import java.io.*;
 import java.util.UUID;
 
+import dto.MatchDto;
 import dto.MatchScoreDto;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import service.FinishedMatchesPersistenceService;
-import service.Match;
 import service.MatchMap;
 import service.MatchScore;
 import utils.DtoUtil;
@@ -27,10 +27,9 @@ public class MatchScoreController extends HttpServlet {
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException,ServletException {
         UUID matchId = UUID.fromString(request.getParameter("uuid"));
-        Match match = MatchMap.currentMatch.get(matchId);
+        MatchDto match = MatchMap.currentMatch.get(matchId);
         int playerId = Integer.parseInt(request.getParameter("player-id"));
-        match = new MatchScore().getMatchScore(match,playerId);
-        MatchMap.updateCurrentMatch(matchId, match);
+        new MatchScore().getMatchScore(matchId,playerId);
         MatchScoreDto matchScoreDTO = new DtoUtil().getMatchScoreDTO(matchId);
         if (match.isFinished()) {
             new FinishedMatchesPersistenceService().saveFinishedMatch(match);

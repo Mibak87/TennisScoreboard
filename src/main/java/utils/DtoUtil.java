@@ -1,5 +1,6 @@
 package utils;
 
+import dto.MatchDto;
 import dto.MatchScoreDto;
 import service.Match;
 import service.MatchMap;
@@ -8,7 +9,7 @@ import java.util.UUID;
 
 public class DtoUtil {
     public MatchScoreDto getMatchScoreDTO(UUID matchId) {
-        Match match = MatchMap.currentMatch.get(matchId);
+        MatchDto match = MatchMap.currentMatch.get(matchId);
         String player1Score = String.valueOf(match.getPlayer1Score());
         String player2Score = String.valueOf(match.getPlayer2Score());
         if (match.isDeuce()) {

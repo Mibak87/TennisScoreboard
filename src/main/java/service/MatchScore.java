@@ -5,33 +5,49 @@ import dto.MatchDto;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import service.scores.*;
-
 import java.util.UUID;
 
 public class MatchScore {
 
     private static final Logger logger = LogManager.getLogger(MatchScore.class);
 
-    public void getScore(UUID matchId,int playerWinId) {
+    public void getMatchScore(UUID matchId,int playerWinId) {
         MatchDto match = MatchMap.currentMatch.get(matchId);
         Points points = new Points(match.getPlayer1Points(),match.getPlayer2Points());
         Sets sets = new Sets(match.getPlayer1Set(),match.getPlayer2Set());
         Scores scores = new Scores(points,sets);
         Scores scoresAfterUpdate;
         if (match.isDeuce()) {
-            new Deuce().getScore(scores,playerWinId);
+            scoresAfterUpdate = new Deuce().getScore(scores,playerWinId);
         } else if (match.isTieBreak()) {
-            new TieBreak().getScore(scores,playerWinId);
+            scoresAfterUpdate = new TieBreak().getScore(scores,playerWinId);
         } else {
             scoresAfterUpdate = new RegularGame().getScore(scores,playerWinId);
             if (scoresAfterUpdate.getPoints().getPlayer1Points().equals("40") &&
                     scoresAfterUpdate.getPoints().getPlayer2Points().equals("40")) {
-                match.setDeuce(true);
+                scoresAfterUpdate.setDeuce(true);
                 logger.info("Playing deuce.");
             }
         }
+        updateMatchDto(scoresAfterUpdate,match);
         MatchMap.updateCurrentMatch(matchId,match);
     }
+
+    private void updateMatchDto(Scores scores,MatchDto matchDto) {
+        matchDto.setPlayer1Points(scores.getPoints().getPlayer1Points());
+        matchDto.setPlayer2Points(scores.getPoints().getPlayer2Points());
+        matchDto.setPlayer1Set(scores.getSets().getPlayer1Set());
+        matchDto.setPlayer2Set(scores.getSets().getPlayer2Set());
+        matchDto.setDeuce(scores.isDeuce());
+        matchDto.setTieBreak(scores.isTieBreak());
+        matchDto.setFinished(scores.isFinished());
+        if (scores.getPlayerWinId() == 1) {
+            matchDto.setPlayerWin(matchDto.getPlayer1());
+        } else if (scores.getPlayerWinId() == 2) {
+            matchDto.setPlayerWin(matchDto.getPlayer2());
+        }
+    }
+    /*
     public Match getMatchScore(Match match, int playerId) {
         if (playerId == 0) {
             if (match.isDeuce()) {
@@ -228,4 +244,6 @@ public class MatchScore {
         }
         return match;
     }
+
+     */
 }
