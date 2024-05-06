@@ -6,8 +6,10 @@ import java.util.List;
 
 public class TieBreak {
     private static final Logger logger = LogManager.getLogger(TieBreak.class);
+    private int setNumber;
     public Scores getScore(Scores scores, int playerWinId) {
-        if (playerWinId == 0) {
+        setNumber = scores.getSets().getCurrentSetNumber();
+        if (playerWinId == 1) {
             return getPlayer1WinPoint(scores);
         }
         return getPlayer2WinPoint(scores);
@@ -21,18 +23,17 @@ public class TieBreak {
             scores.setPoints(new Points(PointStates.ZERO.getValue(),PointStates.ZERO.getValue()));
             scores.setTieBreak(false);
             List<Integer> player1Set = scores.getSets().getPlayer1Set();
-            int player1Game = player1Set.get(player1Set.size()-1) + 1;
+            int player1Game = player1Set.get(setNumber-1) + 1;
             List<Integer> player2Set = scores.getSets().getPlayer2Set();
-            player1Set.set(player1Set.size()-1,player1Game);
-            if (player1Set.size() == 3) {
+            player1Set.set(setNumber-1,player1Game);
+            if (setNumber == 3) {
                 scores.setFinished(true);
                 scores.setPlayerWinId(1);
                 logger.info("Match is finished.");
             } else {
-                player1Set.add(0);
-                player2Set.add(0);
+                setNumber++;
             }
-            scores.setSets(new Sets(player1Set,player2Set));
+            scores.setSets(new Sets(player1Set,player2Set,setNumber));
         } else {
             scores.setPoints(new Points(String.valueOf(player1Point),String.valueOf(player2Point)));
         }
@@ -47,18 +48,17 @@ public class TieBreak {
             scores.setPoints(new Points(PointStates.ZERO.getValue(),PointStates.ZERO.getValue()));
             scores.setTieBreak(false);
             List<Integer> player2Set = scores.getSets().getPlayer2Set();
-            int player2Game = player2Set.get(player2Set.size()-1) + 1;
+            int player2Game = player2Set.get(setNumber-1) + 1;
             List<Integer> player1Set = scores.getSets().getPlayer1Set();
-            player2Set.set(player2Set.size()-1,player2Game);
-            if (player2Set.size() == 2) {
+            player2Set.set(setNumber-1,player2Game);
+            if (setNumber == 3) {
                 scores.setFinished(true);
                 scores.setPlayerWinId(2);
                 logger.info("Match is finished.");
             } else {
-                player1Set.add(0);
-                player2Set.add(0);
+                setNumber++;
             }
-            scores.setSets(new Sets(player1Set,player2Set));
+            scores.setSets(new Sets(player1Set,player2Set,setNumber));
         } else {
             scores.setPoints(new Points(String.valueOf(player1Point),String.valueOf(player2Point)));
         }

@@ -6,7 +6,7 @@ import org.apache.logging.log4j.Logger;
 public class RegularGame {
     private static final Logger logger = LogManager.getLogger(RegularGame.class);
     public Scores getScore(Scores scores, int playerWinId) {
-        if (playerWinId == 0) {
+        if (playerWinId == 1) {
             return getPlayer1WinPoints(scores);
         }
         return getPlayer2WinPoints(scores);
@@ -31,7 +31,7 @@ public class RegularGame {
             case "40" -> {
                 pointsAfterUpdate.setPlayer1Points(PointStates.ZERO.getValue());
                 pointsAfterUpdate.setPlayer2Points(PointStates.ZERO.getValue());
-                scores = new Game().getScore(scores,0);
+                scores = new Game().getScore(scores,1);
             }
         }
         scores.setPoints(pointsAfterUpdate);
@@ -44,20 +44,20 @@ public class RegularGame {
         switch (points.getPlayer2Points()) {
             case "0" -> {
                 pointsAfterUpdate.setPlayer2Points(PointStates.FIFTEEN.getValue());
-                logger.info("Player1 gets 15 points.");
+                logger.info("Player2 gets 15 points.");
             }
             case "15" -> {
                 pointsAfterUpdate.setPlayer2Points(PointStates.THIRTY.getValue());
-                logger.info("Player1 gets 30 points.");
+                logger.info("Player2 gets 30 points.");
             }
             case "30" -> {
-                logger.info("Player1 gets 40 points.");
+                logger.info("Player2 gets 40 points.");
                 pointsAfterUpdate.setPlayer2Points(PointStates.FORTY.getValue());
             }
             case "40" -> {
                 pointsAfterUpdate.setPlayer1Points(PointStates.ZERO.getValue());
                 pointsAfterUpdate.setPlayer2Points(PointStates.ZERO.getValue());
-                scores = new Game().getScore(scores,0);
+                scores = new Game().getScore(scores,2);
             }
         }
         scores.setPoints(pointsAfterUpdate);

@@ -6,7 +6,7 @@ import org.apache.logging.log4j.Logger;
 public class Deuce {
     private static final Logger logger = LogManager.getLogger(Deuce.class);
     public Scores getScore(Scores scores, int playerWinId) {
-        if (playerWinId == 0) {
+        if (playerWinId == 1) {
             return getPlayer1WinDeuce(scores);
         }
         return getPlayer2WinDeuce(scores);
@@ -14,14 +14,17 @@ public class Deuce {
 
     private Scores getPlayer1WinDeuce(Scores scores) {
         Points points = scores.getPoints();
-        if (points.getPlayer1Points().equals("AD")) {
+        String player1Points = points.getPlayer1Points();
+        String player2Points = points.getPlayer2Points();
+        if (player1Points.equals("AD")) {
             scores.setDeuce(false);
             points.setPlayer1Points(PointStates.ZERO.getValue());
             points.setPlayer2Points(PointStates.ZERO.getValue());
             scores.setPoints(points);
-            return new Game().getScore(scores,0);
+            logger.info("Player1 win deuce.");
+            return new Game().getScore(scores,1);
         }
-        if (points.getPlayer2Points().equals("AD")) {
+        if (player2Points.equals("AD")) {
             points.setPlayer2Points(PointStates.FORTY.getValue());
             logger.info("Players have equals scores.");
         } else {
@@ -34,19 +37,22 @@ public class Deuce {
 
     private Scores getPlayer2WinDeuce(Scores scores) {
         Points points = scores.getPoints();
-        if (points.getPlayer2Points().equals("AD")) {
+        String player1Points = points.getPlayer1Points();
+        String player2Points = points.getPlayer2Points();
+        if (player2Points.equals("AD")) {
             scores.setDeuce(false);
             points.setPlayer1Points(PointStates.ZERO.getValue());
             points.setPlayer2Points(PointStates.ZERO.getValue());
             scores.setPoints(points);
-            return new Game().getScore(scores,1);
+            logger.info("Player2 win deuce.");
+            return new Game().getScore(scores,2);
         }
-        if (points.getPlayer1Points().equals("AD")) {
+        if (player1Points.equals("AD")) {
             points.setPlayer1Points(PointStates.FORTY.getValue());
             logger.info("Players have equals scores.");
         } else {
             points.setPlayer2Points(PointStates.ADVANTAGE.getValue());
-            logger.info("Player1 is on advantage.");
+            logger.info("Player2 is on advantage.");
         }
         scores.setPoints(points);
         return scores;

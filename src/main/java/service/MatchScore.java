@@ -14,7 +14,7 @@ public class MatchScore {
     public void getMatchScore(UUID matchId,int playerWinId) {
         MatchDto match = MatchMap.currentMatch.get(matchId);
         Points points = new Points(match.getPlayer1Points(),match.getPlayer2Points());
-        Sets sets = new Sets(match.getPlayer1Set(),match.getPlayer2Set());
+        Sets sets = new Sets(match.getPlayer1Set(),match.getPlayer2Set(), match.getCurrentSetNumber());
         Scores scores = new Scores(points,sets);
         Scores scoresAfterUpdate;
         if (match.isDeuce()) {
@@ -38,6 +38,7 @@ public class MatchScore {
         matchDto.setPlayer2Points(scores.getPoints().getPlayer2Points());
         matchDto.setPlayer1Set(scores.getSets().getPlayer1Set());
         matchDto.setPlayer2Set(scores.getSets().getPlayer2Set());
+        matchDto.setCurrentSetNumber(scores.getSets().getCurrentSetNumber());
         matchDto.setDeuce(scores.isDeuce());
         matchDto.setTieBreak(scores.isTieBreak());
         matchDto.setFinished(scores.isFinished());

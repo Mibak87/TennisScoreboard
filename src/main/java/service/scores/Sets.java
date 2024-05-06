@@ -12,4 +12,5 @@ import java.util.List;
 public class Sets {
     private List<Integer> player1Set;
     private List<Integer> player2Set;
+    private int currentSetNumber;
 }
