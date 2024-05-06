@@ -24,7 +24,7 @@
       <td>${matchScore.player1Set.get(1)}</td>
       <td>${matchScore.player1Set.get(2)}</td>
       <td>
-        <form name="MatchScore" action="match-scores?uuid=${matchScore.uuid}" method="post">
+        <form name="MatchScore" action="match-score?uuid=${matchScore.uuid}" method="post">
           <input type="hidden" name="player-id" value="1">
           <button type="submit" ${matchScore.buttonDisabled}>${matchScore.player1Name} выиграл</button>
         </form>
@@ -37,7 +37,7 @@
       <td>${matchScore.player2Set.get(1)}</td>
       <td>${matchScore.player2Set.get(2)}</td>
       <td>
-        <form name="MatchScore" action="match-scores?uuid=${matchScore.uuid}" method="post">
+        <form name="MatchScore" action="match-score?uuid=${matchScore.uuid}" method="post">
           <input type="hidden" name="player-id" value="2">
           <button type="submit" ${matchScore.buttonDisabled}>${matchScore.player2Name} выиграл</button>
         </form>
