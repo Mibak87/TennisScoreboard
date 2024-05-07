@@ -28,7 +28,6 @@ public class Game {
             logger.info("Player1 wins this set.");
             if (setNumber == 3) {
                 scores.setFinished(true);
-                scores.setPlayerWinId(1);
                 logger.info("Match is finished.");
             } else {
                 setNumber++;
@@ -52,7 +51,6 @@ public class Game {
             logger.info("Player2 wins this set.");
             if (setNumber == 3) {
                 scores.setFinished(true);
-                scores.setPlayerWinId(2);
                 logger.info("Match is finished.");
             } else {
                 setNumber++;

@@ -28,7 +28,6 @@ public class TieBreak {
             player1Set.set(setNumber-1,player1Game);
             if (setNumber == 3) {
                 scores.setFinished(true);
-                scores.setPlayerWinId(1);
                 logger.info("Match is finished.");
             } else {
                 setNumber++;
@@ -53,7 +52,6 @@ public class TieBreak {
             player2Set.set(setNumber-1,player2Game);
             if (setNumber == 3) {
                 scores.setFinished(true);
-                scores.setPlayerWinId(2);
                 logger.info("Match is finished.");
             } else {
                 setNumber++;

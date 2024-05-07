@@ -11,7 +11,6 @@ public class Scores {
     private boolean deuce;
     private boolean tieBreak;
     private boolean finished;
-    private int playerWinId;
 
     public Scores(Points points, Sets sets) {
         this.points = points;

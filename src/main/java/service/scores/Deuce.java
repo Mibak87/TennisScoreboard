@@ -6,6 +6,7 @@ import org.apache.logging.log4j.Logger;
 public class Deuce {
     private static final Logger logger = LogManager.getLogger(Deuce.class);
     public Scores getScore(Scores scores, int playerWinId) {
+        logger.info("Playing deuce.");
         if (playerWinId == 1) {
             return getPlayer1WinDeuce(scores);
         }
