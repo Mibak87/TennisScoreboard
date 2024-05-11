@@ -24,39 +24,39 @@
             <td>Победитель</td>
         </tr>
         <tr>
-            <td>${player1_0}</td>
-            <td>${player2_0}</td>
-            <td>${winner_0}</td>
+            <td>${matches.player1Name.get(0)}</td>
+            <td>${matches.player2Name.get(0)}</td>
+            <td>${matches.playerWin.get(0)}</td>
         </tr>
         <tr>
-            <td>${player1_1}</td>
-            <td>${player2_1}</td>
-            <td>${winner_1}</td>
+            <td>${matches.player1Name.get(1)}</td>
+            <td>${matches.player2Name.get(1)}</td>
+            <td>${matches.playerWin.get(1)}</td>
         </tr>
         <tr>
-            <td>${player1_2}</td>
-            <td>${player2_2}</td>
-            <td>${winner_2}</td>
+            <td>${matches.player1Name.get(2)}</td>
+            <td>${matches.player2Name.get(2)}</td>
+            <td>${matches.playerWin.get(2)}</td>
         </tr>
         <tr>
-            <td>${player1_3}</td>
-            <td>${player2_3}</td>
-            <td>${winner_3}</td>
+            <td>${matches.player1Name.get(3)}</td>
+            <td>${matches.player2Name.get(3)}</td>
+            <td>${matches.playerWin.get(3)}</td>
         </tr>
         <tr>
-            <td>${player1_4}</td>
-            <td>${player2_4}</td>
-            <td>${winner_4}</td>
+            <td>${matches.player1Name.get(4)}</td>
+            <td>${matches.player2Name.get(4)}</td>
+            <td>${matches.playerWin.get(4)}</td>
         </tr>
     </table>
     <p>
     <form action="matches">
-        <input type="hidden" name="page" value=${page_number_last}>
-        <button type="submit" class="page_button" ${button1_hidden}>Предыдущая страница</button>
+        <input type="hidden" name="page" value=${matches.pageNumberLast}>
+        <button type="submit" class="page_button" ${matches.button1Hidden}>Предыдущая страница</button>
     </form>
     <form action="matches">
-        <input type="hidden" name="page" value=${page_number_next}>
-        <button type="submit" class="page_button" ${button2_hidden}>Следующая страница</button>
+        <input type="hidden" name="page" value=${matches.pageNumberNext}>
+        <button type="submit" class="page_button" ${matches.button2Hidden}>Следующая страница</button>
     </form>
     </p>
 </div>

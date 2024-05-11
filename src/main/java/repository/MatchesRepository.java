@@ -37,6 +37,12 @@ public class MatchesRepository implements ScoreboardRepository<Matches> {
         }
     }
 
+    public long findCountNumber() throws HibernateException {
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            return (long) session.createQuery("SELECT COUNT(*) FROM Matches").uniqueResult();
+        }
+    }
+
     @Override
     public void save(Matches matches) throws HibernateException {
         Transaction transaction = null;

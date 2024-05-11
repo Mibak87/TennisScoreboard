@@ -44,6 +44,9 @@
       </td>
     </tr>
   </table>
+  <div id="player1Name">
+    ${matchScore.player1Name}
+  </div>
   <p>
     <a href="matches" class="href-button">Завершенные матчи</a>
   </p>
