@@ -42,8 +42,6 @@ public class DtoUtil {
     public MatchesDto getMatchesDto(int page,String filterPlayer) {
         long matchesCountNumber = new MatchesRepository().findCountNumber();
         int pageNumber = (int) (matchesCountNumber / 5) + 1;
-        System.out.println("page= "+page);
-        System.out.println("pageNumber= "+pageNumber);
         List<Matches> matchesList;
         if (filterPlayer == null || filterPlayer.isEmpty()) {
             matchesList = new MatchesRepository().findFromRangeForPagination(5,page);

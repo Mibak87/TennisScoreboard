@@ -11,7 +11,6 @@ import java.io.IOException;
 public class MatchesController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        //new MatchesView().renderingMatches(request);
         String page = request.getParameter("page");
         int pageNumber = 1;
         if (page != null) {

@@ -23,16 +23,21 @@ public class NewMatchController extends HttpServlet {
         dispatcher.forward(request,response);
     }
 
-    public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         String player1Name = request.getParameter("player1");
         String player2Name = request.getParameter("player2");
-        Players player1 = new Players(player1Name);
-        Players player2 = new Players(player2Name);
-        UUID matchId = UUID.randomUUID();
-        MatchDto currentMatch = new MatchDto(player1, player2);
-        MatchMap.updateCurrentMatch(matchId, currentMatch);
-        logger.info("The match has been created. Players: " + player1Name + " and " + player2Name + ".");
-        response.sendRedirect("match-score?uuid=" + matchId);
+        if (player1Name.equals(player2Name)) {
+            RequestDispatcher dispatcher = request.getRequestDispatcher("error.jsp");
+            dispatcher.forward(request,response);
+        } else {
+            Players player1 = new Players(player1Name);
+            Players player2 = new Players(player2Name);
+            UUID matchId = UUID.randomUUID();
+            MatchDto currentMatch = new MatchDto(player1, player2);
+            MatchMap.updateCurrentMatch(matchId, currentMatch);
+            logger.info("The match has been created. Players: " + player1Name + " and " + player2Name + ".");
+            response.sendRedirect("match-score?uuid=" + matchId);
+        }
     }
 
 }
