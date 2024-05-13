@@ -21,32 +21,26 @@
         <tr>
             <td>Игрок 1</td>
             <td>Игрок 2</td>
-            <td>Победитель</td>
         </tr>
         <tr>
             <td>${matches.player1Name.get(0)}</td>
             <td>${matches.player2Name.get(0)}</td>
-            <td>${matches.playerWin.get(0)}</td>
         </tr>
         <tr>
             <td>${matches.player1Name.get(1)}</td>
             <td>${matches.player2Name.get(1)}</td>
-            <td>${matches.playerWin.get(1)}</td>
         </tr>
         <tr>
             <td>${matches.player1Name.get(2)}</td>
             <td>${matches.player2Name.get(2)}</td>
-            <td>${matches.playerWin.get(2)}</td>
         </tr>
         <tr>
             <td>${matches.player1Name.get(3)}</td>
             <td>${matches.player2Name.get(3)}</td>
-            <td>${matches.playerWin.get(3)}</td>
         </tr>
         <tr>
             <td>${matches.player1Name.get(4)}</td>
             <td>${matches.player2Name.get(4)}</td>
-            <td>${matches.playerWin.get(4)}</td>
         </tr>
     </table>
     <p>

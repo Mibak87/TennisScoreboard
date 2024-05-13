@@ -50,11 +50,16 @@ public class DtoUtil {
         }
         List<String> player1Name = new ArrayList<>(Arrays.asList("","","","",""));
         List<String> player2Name = new ArrayList<>(Arrays.asList("","","","",""));
-        List<String> playerWin = new ArrayList<>(Arrays.asList("","","","",""));
         for (int i = 0; i <= matchesList.size() - 1; i++) {
-            player1Name.set(i,matchesList.get(i).getPlayer1().getName());
-            player2Name.set(i,matchesList.get(i).getPlayer2().getName());
-            playerWin.set(i,matchesList.get(i).getWinner().getName());
+            String player1NameStr = matchesList.get(i).getPlayer1().getName();
+            String player2NameStr = matchesList.get(i).getPlayer2().getName();
+            if (player1NameStr.equals(matchesList.get(i).getWinner().getName())) {
+                player1NameStr += "\uD83C\uDFC6";
+            } else {
+                player2NameStr += "\uD83C\uDFC6";
+            }
+            player1Name.set(i,player1NameStr);
+            player2Name.set(i,player2NameStr);
         }
         String button1Hidden = "";
         if (page == 1) {
@@ -71,7 +76,6 @@ public class DtoUtil {
                 .pageNumber(pageNumber)
                 .player1Name(player1Name)
                 .player2Name(player2Name)
-                .playerWin(playerWin)
                 .button1Hidden(button1Hidden)
                 .button2Hidden(button2Hidden)
                 .pageNumberLast(pageNumberLast)

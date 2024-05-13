@@ -14,7 +14,6 @@ public class MatchesDto {
     private int pageNumber;
     private List<String> player1Name;
     private List<String> player2Name;
-    private List<String> playerWin;
     private String button1Hidden;
     private String button2Hidden;
     private String pageNumberLast;
