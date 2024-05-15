@@ -1,3 +1,4 @@
+<%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix='c'%>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <html lang="ru">
 <head>
@@ -6,6 +7,7 @@
     <link rel="stylesheet" href="css/styles.css" type="text/css">
 </head>
 <body>
+
 <div id="wrapper">
     <h1><%= "Завершенные матчи" %></h1>
     <p>
@@ -22,26 +24,21 @@
             <td>Игрок 1</td>
             <td>Игрок 2</td>
         </tr>
+        <c:forEach var="playerName" items="${matches.matchesList}">
+            <c:set var="player1" value="${playerName.getPlayer1().getName()}"/>
+            <c:set var="player2" value="${playerName.getPlayer2().getName()}"/>
+            <c:set var="winner" value="${playerName.getWinner().getName()}"/>
+            <c:if test="${player1 == winner}">
+                <c:set var="player1" value="${player1}🏆"/>
+            </c:if>
+            <c:if test="${player2 == winner}">
+                <c:set var="player2" value="${player2}🏆"/>
+            </c:if>
         <tr>
-            <td>${matches.player1Name.get(0)}</td>
-            <td>${matches.player2Name.get(0)}</td>
+            <td>${player1}</td>
+            <td>${player2}</td>
         </tr>
-        <tr>
-            <td>${matches.player1Name.get(1)}</td>
-            <td>${matches.player2Name.get(1)}</td>
-        </tr>
-        <tr>
-            <td>${matches.player1Name.get(2)}</td>
-            <td>${matches.player2Name.get(2)}</td>
-        </tr>
-        <tr>
-            <td>${matches.player1Name.get(3)}</td>
-            <td>${matches.player2Name.get(3)}</td>
-        </tr>
-        <tr>
-            <td>${matches.player1Name.get(4)}</td>
-            <td>${matches.player2Name.get(4)}</td>
-        </tr>
+        </c:forEach>
     </table>
     <p>
     <form action="matches">

@@ -8,7 +8,6 @@ import repository.MatchesRepository;
 import service.MatchMap;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
@@ -47,19 +46,7 @@ public class DtoUtil {
             matchesList = new MatchesRepository().findFromRangeForPagination(5,page);
         } else {
             matchesList = new MatchesRepository().findByName(filterPlayer);
-        }
-        List<String> player1Name = new ArrayList<>(Arrays.asList("","","","",""));
-        List<String> player2Name = new ArrayList<>(Arrays.asList("","","","",""));
-        for (int i = 0; i <= matchesList.size() - 1; i++) {
-            String player1NameStr = matchesList.get(i).getPlayer1().getName();
-            String player2NameStr = matchesList.get(i).getPlayer2().getName();
-            if (player1NameStr.equals(matchesList.get(i).getWinner().getName())) {
-                player1NameStr += "\uD83C\uDFC6";
-            } else {
-                player2NameStr += "\uD83C\uDFC6";
-            }
-            player1Name.set(i,player1NameStr);
-            player2Name.set(i,player2NameStr);
+            pageNumber = matchesList.size() / 5 + 1;
         }
         String button1Hidden = "";
         if (page == 1) {
@@ -74,8 +61,8 @@ public class DtoUtil {
         return MatchesDto.builder()
                 .page(page)
                 .pageNumber(pageNumber)
-                .player1Name(player1Name)
-                .player2Name(player2Name)
+                .filterPlayer(filterPlayer)
+                .matchesList(matchesList)
                 .button1Hidden(button1Hidden)
                 .button2Hidden(button2Hidden)
                 .pageNumberLast(pageNumberLast)

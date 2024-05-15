@@ -1,5 +1,6 @@
 package dto;
 
+import entity.Matches;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -12,8 +13,8 @@ import java.util.List;
 public class MatchesDto {
     private int page;
     private int pageNumber;
-    private List<String> player1Name;
-    private List<String> player2Name;
+    private String filterPlayer;
+    private List<Matches> matchesList;
     private String button1Hidden;
     private String button2Hidden;
     private String pageNumberLast;

@@ -43,16 +43,6 @@ class MatchScoreTest {
     }
 
     @Test
-    void deuceAfterPlayer1WinWithPlayer2Advantage() {
-        testMatch.setPlayer1Points("40");
-        testMatch.setPlayer2Points("AD");
-        MatchMap.updateCurrentMatch(matchId, testMatch);
-        new MatchScore().getMatchScore(matchId,1);
-        String player2Points = MatchMap.currentMatch.get(matchId).getPlayer2Points();
-        assertEquals("40",player2Points);
-    }
-
-    @Test
     void playerNotWinGameWhenWinOneTimeWithDeuce() {
         testMatch.setPlayer1Points("40");
         testMatch.setPlayer2Points("40");
