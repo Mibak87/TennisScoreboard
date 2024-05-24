@@ -1,6 +1,6 @@
 package repository;
 
-import entity.Players;
+import entity.Player;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -10,17 +10,17 @@ import utils.HibernateUtil;
 import java.util.List;
 import java.util.Optional;
 
-public class PlayersRepository implements ScoreboardRepository<Players> {
+public class PlayersRepository implements ScoreboardRepository<Player> {
     @Override
-    public Optional<Players> findById(long id) throws HibernateException {
+    public Optional<Player> findById(long id) throws HibernateException {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            Players player = session.get(Players.class,id);
+            Player player = session.get(Player.class,id);
             return Optional.ofNullable(player);
         }
     }
 
     @Override
-    public void save(Players players) throws HibernateException {
+    public void save(Player players) throws HibernateException {
         Transaction transaction = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
@@ -34,16 +34,16 @@ public class PlayersRepository implements ScoreboardRepository<Players> {
     }
 
     @Override
-    public List<Players> findAll() throws HibernateException {
+    public List<Player> findAll() throws HibernateException {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            return session.createQuery("FROM Players", Players.class).getResultList();
+            return session.createQuery("FROM Player", Player.class).getResultList();
         }
     }
 
-    public Optional<Players> findByName(String name) throws HibernateException {
+    public Optional<Player> findByName(String name) throws HibernateException {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            String query = "FROM Players WHERE name = :name";
-            Players player = session.createQuery(query, Players.class)
+            String query = "FROM Player WHERE name = :name";
+            Player player = session.createQuery(query, Player.class)
                     .setParameter("name", name)
                     .getSingleResult();
             return Optional.ofNullable(player);

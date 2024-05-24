@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.UUID;
 
 import dto.MatchDto;
-import entity.Players;
+import entity.Player;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.*;
@@ -30,8 +30,8 @@ public class NewMatchController extends HttpServlet {
             RequestDispatcher dispatcher = request.getRequestDispatcher("error.jsp");
             dispatcher.forward(request,response);
         } else {
-            Players player1 = new Players(player1Name);
-            Players player2 = new Players(player2Name);
+            Player player1 = new Player(player1Name);
+            Player player2 = new Player(player2Name);
             UUID matchId = UUID.randomUUID();
             MatchDto currentMatch = new MatchDto(player1, player2);
             MatchMap.updateCurrentMatch(matchId, currentMatch);

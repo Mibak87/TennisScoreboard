@@ -1,7 +1,7 @@
 package utils;
 
-import entity.Matches;
-import entity.Players;
+import entity.Match;
+import entity.Player;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import repository.MatchesRepository;
@@ -13,42 +13,42 @@ public class HibernateUtil {
     static {
         PlayersRepository playersRepository = new PlayersRepository();
         MatchesRepository matchesRepository = new MatchesRepository();
-        Players player1 = new Players("Джокович");
+        Player player1 = new Player("Джокович");
         playersRepository.save(player1);
-        Players player2 = new Players("Алькараз");
+        Player player2 = new Player("Алькараз");
         playersRepository.save(player2);
-        Matches match1 = new Matches(player1,player2,player1);
+        Match match1 = new Match(player1,player2,player1);
         matchesRepository.save(match1);
 
-        Players player3 = new Players("Синнер");
+        Player player3 = new Player("Синнер");
         playersRepository.save(player3);
-        Players player4 = new Players("Медведев");
+        Player player4 = new Player("Медведев");
         playersRepository.save(player4);
-        Matches match2 = new Matches(player3,player4,player4);
+        Match match2 = new Match(player3,player4,player4);
         matchesRepository.save(match2);
 
-        Players player5 = new Players("Рублёв");
+        Player player5 = new Player("Рублёв");
         playersRepository.save(player5);
-        Players player6 = new Players("Зверев");
+        Player player6 = new Player("Зверев");
         playersRepository.save(player6);
-        Matches match3 = new Matches(player5,player6,player6);
+        Match match3 = new Match(player5,player6,player6);
         matchesRepository.save(match3);
 
-        Players player7 = new Players("Руне");
+        Player player7 = new Player("Руне");
         playersRepository.save(player7);
-        Players player8 = new Players("Гуркач");
+        Player player8 = new Player("Гуркач");
         playersRepository.save(player8);
-        Matches match4 = new Matches(player7,player8,player7);
+        Match match4 = new Match(player7,player8,player7);
         matchesRepository.save(match4);
 
-        Players player9 = new Players("Рууд");
+        Player player9 = new Player("Рууд");
         playersRepository.save(player9);
-        Matches match5 = new Matches(player9,player6,player6);
+        Match match5 = new Match(player9,player6,player6);
         matchesRepository.save(match5);
 
-        Players player10 = new Players("Умбер");
+        Player player10 = new Player("Умбер");
         playersRepository.save(player10);
-        Matches match6 = new Matches(player5,player10,player5);
+        Match match6 = new Match(player5,player10,player5);
         matchesRepository.save(match6);
     }
     public static SessionFactory getSessionFactory() {

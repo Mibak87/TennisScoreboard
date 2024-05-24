@@ -1,12 +1,10 @@
 package service;
 
 import dto.MatchDto;
-import entity.Players;
+import entity.Player;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
@@ -18,8 +16,8 @@ class MatchScoreTest {
 
     @BeforeEach
     void init() {
-        Players player1 = new Players("Иванов");
-        Players player2 = new Players("Петров");
+        Player player1 = new Player("Иванов");
+        Player player2 = new Player("Петров");
         testMatch = new MatchDto(player1,player2);
         matchId = UUID.randomUUID();
     }

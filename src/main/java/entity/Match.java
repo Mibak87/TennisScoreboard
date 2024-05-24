@@ -10,21 +10,21 @@ import lombok.*;
 @ToString
 @Entity
 @Table(name = "Matches")
-public class Matches {
+public class Match {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     @ManyToOne
     @JoinColumn(name = "Player1")
-    private Players player1;
+    private Player player1;
     @ManyToOne
     @JoinColumn(name = "Player2")
-    private Players player2;
+    private Player player2;
     @ManyToOne
     @JoinColumn(name = "Winner")
-    private Players winner;
+    private Player winner;
 
-    public Matches(Players player1, Players player2, Players winner) {
+    public Match(Player player1, Player player2, Player winner) {
         this.player1 = player1;
         this.player2 = player2;
         this.winner = winner;

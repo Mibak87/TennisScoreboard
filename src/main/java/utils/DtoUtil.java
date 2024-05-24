@@ -3,7 +3,7 @@ package utils;
 import dto.MatchDto;
 import dto.MatchScoreDto;
 import dto.MatchesDto;
-import entity.Matches;
+import entity.Match;
 import repository.MatchesRepository;
 import service.MatchMap;
 
@@ -40,7 +40,7 @@ public class DtoUtil {
     public MatchesDto getMatchesDto(int page,String filterPlayer) {
         long matchesCountNumber = new MatchesRepository().findCountNumber();
         int pageNumber = (int) (matchesCountNumber / 5) + 1;
-        List<Matches> matchesList;
+        List<Match> matchesList;
         if (filterPlayer == null || filterPlayer.isEmpty()) {
             matchesList = new MatchesRepository().findFromRangeForPagination(5,page);
         } else {

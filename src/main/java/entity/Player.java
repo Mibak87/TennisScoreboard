@@ -10,14 +10,14 @@ import lombok.*;
 @ToString
 @Entity
 @Table(name = "Players")
-public class Players {
+public class Player {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     @Column(unique = true)
     private String name;
 
-    public Players (String name) {
+    public Player(String name) {
         this.name = name;
     }
 }
